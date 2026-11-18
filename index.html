@@ -74,68 +74,80 @@
 <body class="bg-navy-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-slate-100 selection:text-navy-950 antialiased">
 
     <!-- TOP NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 glass-header bg-navy-950/80 border-b border-navy-800 px-4 sm:px-8 py-3.5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+    <header class="sticky top-0 z-50 glass-header bg-navy-950/90 border-b border-navy-800 px-4 sm:px-8 py-3.5">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <!-- Logo & Brand -->
-            <div class="flex items-center space-x-3.5">
-                <div class="w-9 h-9 rounded-xl bg-white text-navy-950 flex items-center justify-center font-black shadow-lg">
-                    <i class="fa-solid fa-bolt text-lg"></i>
-                </div>
-                <div>
-                    <span class="font-extrabold text-base sm:text-lg tracking-tight text-white uppercase">MULTİMETRE</span>
-                    <span class="hidden sm:inline-block text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-navy-850 text-slate-300 ml-2 border border-navy-700">PORTAL</span>
+            <div class="flex items-center justify-between w-full sm:w-auto">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-9 h-9 rounded-xl bg-white text-navy-950 flex items-center justify-center font-black shadow-lg">
+                        <i class="fa-solid fa-bolt text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-base sm:text-lg tracking-tight text-white uppercase">MULTİMETRE</span>
+                        <span class="inline-block text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-navy-850 text-slate-300 ml-2 border border-navy-700">PORTAL</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-md relative hidden sm:block">
+            <!-- MAIN SECTION SWITCHER TABS -->
+            <div class="flex items-center bg-navy-900 p-1 rounded-xl border border-navy-700 w-full sm:w-auto justify-center">
+                <button id="tabBtnKavramlar" onclick="switchMainTab('kavramlar')" class="flex-1 sm:flex-none px-4 py-2 text-xs font-bold rounded-lg bg-white text-navy-950 transition shadow-sm flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Elektriksel Kavramlar</span>
+                </button>
+                <button id="tabBtnHesaplamalar" onclick="switchMainTab('hesaplamalar')" class="flex-1 sm:flex-none px-4 py-2 text-xs font-bold rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>Elektriksel Hesaplamalar</span>
+                </button>
+            </div>
+
+            <!-- Search Bar (Only visible in Kavramlar tab) -->
+            <div id="searchContainer" class="flex-1 max-w-xs relative hidden lg:block">
                 <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                <input type="text" id="searchInput" onkeyup="filterDocs()" placeholder="Konu, formül veya kavram ara..." class="w-full bg-navy-900 text-white placeholder-slate-400 text-sm rounded-xl pl-10 pr-4 py-2 border border-navy-700 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition">
-            </div>
-
-            <!-- Quick Action Links -->
-            <div class="flex items-center space-x-3">
-                <a href="#lab" class="px-4 py-2 text-xs font-semibold rounded-xl bg-white hover:bg-slate-200 text-navy-950 transition shadow-md flex items-center space-x-2">
-                    <i class="fa-solid fa-sliders"></i>
-                    <span>Sanal Osiloskop</span>
-                </a>
+                <input type="text" id="searchInput" onkeyup="filterDocs()" placeholder="Kavram veya formül ara..." class="w-full bg-navy-900 text-white placeholder-slate-400 text-xs rounded-xl pl-9 pr-4 py-2 border border-navy-700 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition">
             </div>
         </div>
     </header>
 
-    <!-- MAIN LAYOUT WRAPPER -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- ===================================================================== -->
+    <!-- BÖLÜM 1: ELEKTRİKSEL KAVRAMLAR (TANIMLAR VE TEORİLER)                 -->
+    <!-- ===================================================================== -->
+    <div id="viewKavramlar" class="max-w-7xl mx-auto px-4 sm:px-8 py-8 w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8">
 
         <!-- SIDEBAR NAVIGATION -->
         <aside class="lg:col-span-3">
             <div class="sticky top-24 space-y-4">
                 <div class="bg-navy-900 border border-navy-800 rounded-2xl p-4 shadow-xl">
-                    <div class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-widest mb-3 px-2">Dokümantasyon</div>
+                    <div class="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-widest mb-3 px-2">Konu Başlıkları</div>
                     <nav class="space-y-1 text-sm font-medium" id="sidebarMenu">
                         <a href="#elektrik-giris" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
                             <span>0. Elektrik & Atom Temelleri</span>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">Giriş</span>
                         </a>
+                        <a href="#temel-buyuklukler" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
+                            <span>1. Temel Büyüklükler</span>
+                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">V/I/R/W</span>
+                        </a>
                         <a href="#dc-temeller" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
-                            <span>1. DC Akım & Teoremler</span>
+                            <span>2. Doğru Akım (DC)</span>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">DC</span>
                         </a>
                         <a href="#ac-esaslar" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
-                            <span>2. AC Esasları & Sinyaller</span>
+                            <span>3. Alternatif Akım (AC)</span>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">AC</span>
                         </a>
                         <a href="#empedans-rezonans" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
-                            <span>3. Reaktans & Empedans</span>
-                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">Z</span>
+                            <span>4. Empedans & Reaktans</span>
+                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">Z / X</span>
                         </a>
                         <a href="#yari-iletkenler" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
-                            <span>4. Yarı İletken Elemanlar</span>
+                            <span>5. Yarı İletken Elemanlar</span>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">FET</span>
                         </a>
-                        <a href="#lab" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-white bg-navy-800 font-semibold border border-navy-600 mt-3 shadow-sm hover:bg-navy-700 transition">
-                            <span><i class="fa-solid fa-calculator mr-2 text-slate-300"></i>Hesaplayıcı & Lab</span>
+                        <button onclick="switchMainTab('hesaplamalar')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-white bg-navy-800 font-semibold border border-navy-600 mt-3 shadow-sm hover:bg-navy-700 transition text-left">
+                            <span><i class="fa-solid fa-calculator mr-2 text-slate-300"></i>Hesaplamalara Geç</span>
                             <i class="fa-solid fa-arrow-right text-xs text-slate-400"></i>
-                        </a>
+                        </button>
                     </nav>
                 </div>
             </div>
@@ -149,14 +161,14 @@
                 <div class="absolute -right-16 -top-16 w-80 h-80 bg-navy-600/20 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="relative z-10 max-w-2xl space-y-4">
                     <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-navy-800 border border-navy-600 text-slate-300 text-xs font-mono">
-                        <i class="fa-solid fa-microchip text-slate-400"></i>
-                        <span>AKADEMİK MÜHENDİSLİK DOKÜMANI</span>
+                        <i class="fa-solid fa-book text-slate-400"></i>
+                        <span>BÖLÜM 1: ELEKTRİKSEL KAVRAMLAR</span>
                     </div>
                     <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white leading-tight">
-                        Elektrik & Elektronik Teorik Portalı
+                        Elektrik & Elektronik Kavramlar Rehberi
                     </h1>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
-                        Doğru Akım (DC) ve Alternatif Akım (AC) devre analizi, atomik temeller, karmaşık empedans, rezonans ve aktif devre elemanlarının teknik analizi.
+                        Atomik yapıdan temel elektriksel büyüklüklere, DC ve AC devre teorisinden empedans ve reaktans kavramlarına kadar eksiksiz teknik dokümantasyon.
                     </p>
                 </div>
             </div>
@@ -171,7 +183,7 @@
                 <div class="p-6 rounded-2xl bg-navy-900 border border-navy-800 space-y-4">
                     <h3 class="font-bold text-base text-white">Elektriğin Tanımı ve Günlük Hayattaki Önemi</h3>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Elektrik, yüklü parçacıkların (özellikle elektronların) hareketi veya birikimi ile ortaya çıkan fiziksel bir enerji formudur. Günlük hayatımızda evlerimizi aydınlatan lambalardan, akıllı telefonlarımıza, hastanelerdeki yaşam destek ünitelerinden endüstriyel fabrikalardaki devasa robotlara kadar medeniyetin en temel enerji taşıyıcısıdır. Elektrik olmadan modern teknolojinin, haberleşmenin ve üretimin sürdürülmesi imkansızdır.
+                        Elektrik, yüklü parçacıkların (özellikle elektronların) hareketi veya birikimi ile ortaya çıkan fiziksel bir enerji formudur. Günlük hayatımızda evlerimizi aydınlatan lambalardan akıllı telefonlarımıza, hastanelerdeki yaşam destek ünitelerinden endüstriyel fabrikalardaki robotlara kadar medeniyetin en temel enerji taşıyıcısıdır.
                     </p>
                 </div>
 
@@ -181,7 +193,7 @@
                             <i class="fa-solid fa-atom mr-2 text-slate-400"></i> Atom ve Elektron Hareketi
                         </h3>
                         <p class="text-xs text-slate-300 leading-relaxed">
-                            Bütün maddeler atomlardan oluşur. Atomun merkezinde proton ve nötronlar, etrafında ise belirli yörüngelerde dönen elektronlar bulunur. Çekirdekten uzaktaki **valans (değerlik) elektronları**, dışarıdan bir kuvvet (potansiyel fark) uygulandığında atomdan kopa bilir. Bu serbest elektronların bir atomdan diğerine doğru düzenli şekilde sürüklenmesi **elektrik akımını** oluşturur.
+                            Bütün maddeler atomlardan oluşur. Atomun merkezinde proton ve nötronlar, etrafında ise belirli yörüngelerde dönen elektronlar bulunur. Çekirdekten uzaktaki <strong>valans (değerlik) elektronları</strong>, dışarıdan bir kuvvet (potansiyel fark) uygulandığında atomdan kopabilir. Bu serbest elektronların bir atomdan diğerine doğru düzenli şekilde sürüklenmesi <strong>elektrik akımını</strong> oluşturur.
                         </p>
                     </div>
 
@@ -190,17 +202,123 @@
                             <i class="fa-solid fa-water mr-2 text-slate-400"></i> Su Akışı Analojisi
                         </h3>
                         <p class="text-xs text-slate-300 leading-relaxed">
-                            Elektriği anlamanın en kolay yolu su borusu benzetmesidir: **Gerilim (Volt)** suyu iten pompa basıncı, **Akım (Amper)** borudan akan suyun miktarı, **Direnç (Ohm)** ise borunun darlığıdır. Basınç uygulandığında elektronlar tıpkı borudaki su gibi iletken boyunca akmaya başlar.
+                            Elektriği anlamanın en kolay yolu su borusu benzetmesidir: <strong>Gerilim (Volt)</strong> suyu iten pompa basıncı, <strong>Akım (Amper)</strong> borudan akan suyun miktarı, <strong>Direnç (Ohm)</strong> ise borunun darlığıdır. Basınç uygulandığında elektronlar tıpkı borudaki su gibi iletken boyunca akmaya başlar.
                         </p>
                     </div>
                 </div>
             </section>
 
-            <!-- SECTION 1: DC AKIM & TEMELLERİ -->
-            <section id="dc-temeller" class="doc-section space-y-6 scroll-mt-24">
+            <!-- SECTION 1: TEMEL BÜYÜKLÜKLER (AKIM, VOLTAJ, DİRENÇ, GÜÇ, FREKANS, ENERJİ) -->
+            <section id="temel-buyuklukler" class="doc-section space-y-6 scroll-mt-24">
                 <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
                     <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">01</div>
-                    <h2 class="text-2xl font-bold tracking-tight text-white">Doğru Akım (DC) Temelleri, Kullanım Alanları ve Teoremler</h2>
+                    <h2 class="text-2xl font-bold tracking-tight text-white">Temel Elektriksel Büyüklükler</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Akım -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Elektrik Akımı (I)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Amper [A]</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Bir iletkenin kesitinden birim zamanda geçen elektrik yükü miktarıdır. Elektronların akış hızını ve yoğunluğunu ifade eder.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">I = Q / t</span> veya <span class="text-white font-bold">I = V / R</span>
+                        </div>
+                    </div>
+
+                    <!-- Gerilim -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Gerilim / Voltaj (V)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Volt [V]</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Bir devredeki iki nokta arasındaki potansiyel enerji farkıdır. Elektronları iletken boyunca harekete zorlayan itici güçtür.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">V = I · R</span> veya <span class="text-white font-bold">V = W / Q</span>
+                        </div>
+                    </div>
+
+                    <!-- Direnç -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Direnç (R)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Ohm [Ω]</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Bir maddenin üzerinden geçen elektrik akımına karşı gösterdiği zorluktur. İletkenin cinsine, boyuna ve kesit alanına bağlıdır.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">R = V / I</span> veya <span class="text-white font-bold">R = ρ · (L / A)</span>
+                        </div>
+                    </div>
+
+                    <!-- Güç (Watt) -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Elektriksel Güç (P)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Watt [W]</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Bir elektrik devresinde birim zamanda harcanan veya üretilen enerji miktarıdır. Cihazların çalışma kapasitesini gösterir.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">P = V · I</span> veya <span class="text-white font-bold">P = I² · R</span>
+                        </div>
+                    </div>
+
+                    <!-- Frekans (Hertz) -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Frekans (f)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Hertz [Hz]</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Alternatif akımda (AC) sinyalin 1 saniye içerisinde tamamladığı tam salınım (saykıl) veya yön değiştirme sayısıdır.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">f = 1 / T</span> (T: Periyot [sn])
+                        </div>
+                    </div>
+
+                    <!-- Enerji (kWh) -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Elektrik Enerjisi (E)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Kilowatt-Saat [kWh]</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Belirli bir güce sahip cihazın belli bir süre boyunca tükettiği toplam iş miktarıdır. Elektrik sayaçları tüketimi kWh cinsinden ölçer.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">E = P · t</span> (Güç [kW] × Zaman [Saat])
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: DC AKIM & TEMELLERİ -->
+            <section id="dc-temeller" class="doc-section space-y-6 scroll-mt-24">
+                <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
+                    <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">02</div>
+                    <h2 class="text-2xl font-bold tracking-tight text-white">Doğru Akım (DC) ve Devre Teoremleri</h2>
                 </div>
 
                 <!-- DC Tanım ve Kullanım Alanları -->
@@ -210,7 +328,7 @@
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Yön ve Şiddet Sabit</span>
                     </div>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Doğru akım, elektrik yüklerinin (elektronların) devre boyunca **tek yönde** aktığı akım türüdür. Zamanla ne yönü ne de genliği (şiddeti) değişir; düz bir çizgi izler.
+                        Doğru akım, elektrik yüklerinin (elektronların) devre boyunca <strong>tek yönde</strong> aktığı akım türüdür. Zamanla ne yönü ne de genliği (şiddeti) değişir; düz bir çizgi izler.
                     </p>
 
                     <div class="pt-2">
@@ -227,7 +345,7 @@
                                 <i class="fa-solid fa-car text-slate-400 mt-0.5"></i>
                                 <div>
                                     <strong class="text-white block">Otomotiv ve Elektrikli Araçlar:</strong>
-                                    <span class="text-slate-300">Araç aküleri, elektrikli araç batarya yönetim sistemleri ve DC motorlar.</span>
+                                    <span class="text-slate-300">Araç aküleri, elektrikli araç batarya sistemleri ve DC motorlar.</span>
                                 </div>
                             </div>
                             <div class="p-3 rounded-xl bg-navy-950 border border-navy-800 flex items-start space-x-2.5">
@@ -241,45 +359,10 @@
                                 <i class="fa-solid fa-microchip text-slate-400 mt-0.5"></i>
                                 <div>
                                     <strong class="text-white block">Elektronik Devre Kartları:</strong>
-                                    <span class="text-slate-300">Entegre devreler, mikrodenetleyiciler ve adaptörle çalışan tüm dijital sistemler.</span>
+                                    <span class="text-slate-300">Entegre devreler, mikrodenetleyiciler ve adaptörle çalışan dijital sistemler.</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Akım -->
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-base text-white">Elektrik Akımı (I)</h3>
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Amper [A]</span>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            İletkenden geçen birim yük miktarıdır (I = dQ / dt). DC'de akım yönü ve büyüklüğü sabit kalır.
-                        </p>
-                    </div>
-
-                    <!-- Gerilim -->
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-base text-white">Gerilim (V)</h3>
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Volt [V]</span>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            Yükü hareket ettirmek için gereken potansiyel enerji farkıdır (V = dW / dQ).
-                        </p>
-                    </div>
-
-                    <!-- Direnç -->
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-base text-white">Direnç (R)</h3>
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Ohm [Ω]</span>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            Akım akışına karşı gösterilen zorluktur. Öz direnç, uzunluk ve kesite bağlıdır (R = ρ · L / A).
-                        </p>
                     </div>
                 </div>
 
@@ -323,10 +406,10 @@
                 </div>
             </section>
 
-            <!-- SECTION 2: AC ESASLARI & KULLANIM ALANLARI -->
+            <!-- SECTION 3: AC ESASLARI & KULLANIM ALANLARI -->
             <section id="ac-esaslar" class="doc-section space-y-6 scroll-mt-24">
                 <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
-                    <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">02</div>
+                    <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">03</div>
                     <h2 class="text-2xl font-bold tracking-tight text-white">Alternatif Akım (AC) Esasları ve Kullanım Alanları</h2>
                 </div>
 
@@ -421,47 +504,103 @@
                 </div>
             </section>
 
-            <!-- SECTION 3: REAKTANS & EMPEDANS -->
+            <!-- SECTION 4: EMPEDANS, REAKTANS, ENDÜKTANS & KAPASİTANS (ÖNCE TANIM, SONRA FORMÜL) -->
             <section id="empedans-rezonans" class="doc-section space-y-6 scroll-mt-24">
                 <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
-                    <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">03</div>
-                    <h2 class="text-2xl font-bold tracking-tight text-white">Reaktans, Kompleks Empedans (Z) ve Rezonans</h2>
+                    <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">04</div>
+                    <h2 class="text-2xl font-bold tracking-tight text-white">Empedans, Reaktans, Endüktans ve Kapasitans</h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-2">
-                        <div class="text-slate-400 font-mono">Saf Direnç</div>
-                        <div class="font-mono text-base font-bold text-white">Z_R = R</div>
-                        <p class="text-slate-300">Akım ve gerilim tam aynı fazdadır (θ = 0°).</p>
+                <!-- 4 Kavram Kartı: Önce Tanım Sonra Formül -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    
+                    <!-- 1. Empedans -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">1. Empedans (Z)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Ohm [Ω]</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                <strong>Tanımı:</strong> Alternatif akım (AC) devrelerinde, devrenin akıma karşı gösterdiği <strong>toplam zorluktur</strong>. Hem saf omik direncin (R) hem de bobin ve kondansatörlerin oluşturduğu reaktansın (X) vektörel birleşimidir.
+                            </p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-navy-950 border border-navy-800 font-mono space-y-1">
+                            <span class="text-[10px] text-slate-400 block">Formülü:</span>
+                            <div class="text-white font-bold text-sm">Z = √( R² + (X_L - X_C)² )</div>
+                        </div>
                     </div>
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-2">
-                        <div class="text-slate-400 font-mono">Endüktif Reaktans</div>
-                        <div class="font-mono text-base font-bold text-white">X_L = 2πfL</div>
-                        <p class="text-slate-300">Gerilim akımdan 90° öndedir. Frekans arttıkça engelleme artar.</p>
+
+                    <!-- 2. Reaktans -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">2. Reaktans (X)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Ohm [Ω]</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                <strong>Tanımı:</strong> AC devrelerde bobin (endüktif) ve kondansatörlerin (kapasitif), sinyalin frekansına bağlı olarak akım değişimine karşı gösterdikleri dirençtir. Enerjiyi ısıya dönüştürmez, manyetik veya elektrik alanda depolar.
+                            </p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-navy-950 border border-navy-800 font-mono space-y-1">
+                            <span class="text-[10px] text-slate-400 block">Formülleri:</span>
+                            <div class="text-white font-bold text-xs">Endüktif: X_L = 2πfL &nbsp;|&nbsp; Kapasitif: X_C = 1 / (2πfC)</div>
+                        </div>
                     </div>
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-2">
-                        <div class="text-slate-400 font-mono">Kapasitif Reaktans</div>
-                        <div class="font-mono text-base font-bold text-white">X_C = 1 / (2πfC)</div>
-                        <p class="text-slate-300">Akım gerilimden 90° öndedir. Frekans arttıkça direnç düşer.</p>
+
+                    <!-- 3. Endüktans -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">3. Endüktans (L)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Henry [H]</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                <strong>Tanımı:</strong> Bir bobinin (iletken sargının), içinden geçen elektrik akımındaki ani değişimlere karşı koyma ve enerjiyi <strong>manyetik alan</strong> olarak depolama özelliğidir.
+                            </p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-navy-950 border border-navy-800 font-mono space-y-1">
+                            <span class="text-[10px] text-slate-400 block">Formülleri:</span>
+                            <div class="text-white font-bold text-xs">V_L = L · (dI / dt) &nbsp;|&nbsp; L = (N² · μ · A) / l</div>
+                        </div>
                     </div>
+
+                    <!-- 4. Kapasitans -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">4. Kapasitans (C)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Farad [F]</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                <strong>Tanımı:</strong> Bir kondansatörün (kapasitörün), uçlarına uygulanan gerilim altında elektrik yükünü <strong>elektrik alan</strong> içerisinde depolayabilme kapasitesidir.
+                            </p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-navy-950 border border-navy-800 font-mono space-y-1">
+                            <span class="text-[10px] text-slate-400 block">Formülleri:</span>
+                            <div class="text-white font-bold text-xs">C = Q / V &nbsp;|&nbsp; C = ε · (A / d)</div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Rezonans Denklemi -->
                 <div class="p-6 rounded-2xl bg-navy-900 border border-navy-800 space-y-3 font-mono text-xs">
-                    <div class="text-slate-400">// Kompleks Empedans Vektörü</div>
-                    <div class="text-white text-sm">Z = R + j(X_L - X_C)</div>
-                    <div class="text-slate-300">|Z| = √( R² + (X_L - X_C)² )</div>
+                    <div class="text-slate-400">// Seri Rezonans Durumu</div>
+                    <p class="font-sans text-slate-300 text-xs">
+                        Devrede endüktif reaktans ile kapasitif reaktansın birbirine eşit olduğu (X_L = X_C) özel frekans noktasına <strong>Rezonans Frekansı</strong> denir. Bu anda empedans minimuma (Z = R) iner.
+                    </p>
                     <div class="pt-2 border-t border-navy-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-                        <span class="text-slate-300">Seri Rezonans Anında (X_L = X_C):</span>
+                        <span class="text-slate-300">Rezonans Frekansı Formülü:</span>
                         <span class="px-3 py-1.5 rounded-lg math-badge text-white font-bold">f₀ = 1 / ( 2π √(L · C) )</span>
                     </div>
                 </div>
             </section>
 
-            <!-- SECTION 4: YARI İLETKENLER -->
+            <!-- SECTION 5: YARI İLETKENLER -->
             <section id="yari-iletkenler" class="doc-section space-y-6 scroll-mt-24">
                 <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
-                    <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">04</div>
+                    <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">05</div>
                     <h2 class="text-2xl font-bold tracking-tight text-white">Yarı İletken Bileşenler ve Aktif Elemanlar</h2>
                 </div>
 
@@ -487,137 +626,218 @@
                 </div>
             </section>
 
-            <!-- INTERACTIVE LAB & SIMULATOR SECTION -->
-            <section id="lab" class="space-y-6 scroll-mt-24 pt-6 border-t border-navy-800">
-                <div>
-                    <h2 class="text-2xl font-extrabold tracking-tight text-white">Sanal Laboratuvar & İnteraktif Hesaplayıcılar</h2>
-                    <p class="text-xs text-slate-400">AC/DC sinyal karşılaştırma osiloskobu ve kompleks empedans simülatörü.</p>
-                </div>
-
-                <!-- OSCILLOSCOPE CANVAS SIMULATOR -->
-                <div class="p-6 rounded-3xl bg-navy-900 border border-navy-700 text-white space-y-4 shadow-2xl">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-navy-800 pb-4">
-                        <div class="flex items-center space-x-2.5">
-                            <span class="w-3 h-3 rounded-full bg-white animate-pulse"></span>
-                            <span class="font-mono text-xs font-bold uppercase tracking-wider text-white">Dijital Sinyal Osiloskobu</span>
-                        </div>
-                        <!-- Controls -->
-                        <div class="flex flex-wrap items-center gap-4 text-xs font-mono">
-                            <label class="flex items-center space-x-2">
-                                <span class="text-slate-300">Sinyal Türü:</span>
-                                <select id="waveType" onchange="drawScope()" class="bg-navy-950 border border-navy-700 text-white rounded-lg px-2 py-1 focus:outline-none">
-                                    <option value="ac">AC Sinüs Dalgası</option>
-                                    <option value="dc">DC Doğru Akım (Düz)</option>
-                                </select>
-                            </label>
-                            <label class="flex items-center space-x-2">
-                                <span class="text-slate-300">Frekans (f):</span>
-                                <input type="range" id="scopeFreq" min="1" max="10" value="3" oninput="drawScope()" class="w-20 accent-white">
-                            </label>
-                            <label class="flex items-center space-x-2">
-                                <span class="text-slate-300">Faz Farkı (φ):</span>
-                                <input type="range" id="scopePhase" min="0" max="180" value="30" oninput="drawScope()" class="w-20 accent-slate-400">
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="relative w-full h-56 bg-navy-950 rounded-2xl border border-navy-800 overflow-hidden">
-                        <canvas id="scopeCanvas" class="w-full h-full"></canvas>
-                    </div>
-
-                    <div class="flex justify-between items-center text-[11px] font-mono text-slate-400 px-1">
-                        <div class="flex items-center space-x-4">
-                            <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-white mr-1.5"></span> Gerilim (V)</span>
-                            <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-slate-400 mr-1.5"></span> Akım (I)</span>
-                        </div>
-                        <span id="phaseDegDisplay">Faz Farkı: 30°</span>
-                    </div>
-                </div>
-
-                <!-- CALCULATORS GRID -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <!-- Calculator 1: DC Ohm & Power -->
-                    <div class="p-6 rounded-3xl bg-navy-900 border border-navy-800 space-y-4">
-                        <h3 class="font-bold text-xs uppercase tracking-widest text-slate-400 font-mono flex items-center justify-between">
-                            <span>DC Ohm & Güç Hesaplayıcı</span>
-                            <i class="fa-solid fa-bolt text-white"></i>
-                        </h3>
-                        <div class="space-y-3 text-xs">
-                            <div>
-                                <label class="text-slate-300 block mb-1 font-mono">Gerilim (V - Volt)</label>
-                                <input type="number" id="dcV" value="12" oninput="calcDC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2.5 font-mono text-white focus:outline-none focus:border-white">
-                            </div>
-                            <div>
-                                <label class="text-slate-300 block mb-1 font-mono">Direnç (R - Ohm)</label>
-                                <input type="number" id="dcR" value="4" oninput="calcDC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2.5 font-mono text-white focus:outline-none focus:border-white">
-                            </div>
-                            <div class="pt-3 border-t border-navy-800 grid grid-cols-2 gap-3 font-mono text-center">
-                                <div class="p-3 rounded-xl bg-navy-950 border border-navy-800">
-                                    <span class="text-[10px] text-slate-400 block">Akım (I)</span>
-                                    <strong id="outI" class="text-white text-base">3.00 A</strong>
-                                </div>
-                                <div class="p-3 rounded-xl bg-navy-950 border border-navy-800">
-                                    <span class="text-[10px] text-slate-400 block">Güç (P)</span>
-                                    <strong id="outP" class="text-white text-base">36.00 W</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Calculator 2: AC Impedance & Resonance -->
-                    <div class="p-6 rounded-3xl bg-navy-900 border border-navy-800 space-y-4">
-                        <h3 class="font-bold text-xs uppercase tracking-widest text-slate-400 font-mono flex items-center justify-between">
-                            <span>AC Empedans & Rezonans</span>
-                            <i class="fa-solid fa-wave-square text-white"></i>
-                        </h3>
-                        <div class="grid grid-cols-2 gap-3 text-xs">
-                            <div>
-                                <label class="text-slate-300 block mb-1 font-mono">R (Ω)</label>
-                                <input type="number" id="acR" value="15" oninput="calcAC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2 font-mono text-white focus:outline-none focus:border-white">
-                            </div>
-                            <div>
-                                <label class="text-slate-300 block mb-1 font-mono">Frekans f (Hz)</label>
-                                <input type="number" id="acF" value="50" oninput="calcAC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2 font-mono text-white focus:outline-none focus:border-white">
-                            </div>
-                            <div>
-                                <label class="text-slate-300 block mb-1 font-mono">L (mH)</label>
-                                <input type="number" id="acL" value="100" oninput="calcAC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2 font-mono text-white focus:outline-none focus:border-white">
-                            </div>
-                            <div>
-                                <label class="text-slate-300 block mb-1 font-mono">C (µF)</label>
-                                <input type="number" id="acC" value="47" oninput="calcAC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2 font-mono text-white focus:outline-none focus:border-white">
-                            </div>
-                        </div>
-
-                        <div class="pt-2 border-t border-navy-800 space-y-2 font-mono text-xs">
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-400">Toplam Empedans |Z|:</span>
-                                <strong id="outZ" class="text-white text-sm">40.12 Ω</strong>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-slate-400">Rezonans Frekansı f₀:</span>
-                                <strong id="outF0" class="text-white text-sm">73.41 Hz</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
         </main>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- BÖLÜM 2: ELEKTRİKSEL HESAPLAMALAR (SİMÜLATÖR VE ARAÇLAR)              -->
+    <!-- ===================================================================== -->
+    <div id="viewHesaplamalar" class="hidden max-w-7xl mx-auto px-4 sm:px-8 py-8 w-full flex-1 space-y-8">
+        
+        <!-- HEADER CARD -->
+        <div class="relative overflow-hidden bg-gradient-to-br from-navy-900 via-navy-850 to-navy-950 border border-navy-700 rounded-3xl p-8 text-white shadow-2xl glow-navy flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="space-y-2">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-navy-800 border border-navy-600 text-slate-300 text-xs font-mono">
+                    <i class="fa-solid fa-calculator text-slate-400"></i>
+                    <span>BÖLÜM 2: ELEKTRİKSEL HESAPLAMALAR</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                    İnteraktif Hesaplayıcılar & Sanal Laboratuvar
+                </h1>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-2xl">
+                    Ohm kanunu, güç, enerji tüketimi, AC empedans, rezonans frekansı hesaplayıcıları ve canlı sinyal osiloskobu.
+                </p>
+            </div>
+            <button onclick="switchMainTab('kavramlar')" class="px-4 py-2.5 text-xs font-semibold rounded-xl bg-navy-800 hover:bg-navy-700 text-white border border-navy-600 transition flex items-center space-x-2 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Kavramlara Dön</span>
+            </button>
+        </div>
+
+        <!-- CALCULATORS GRID (3 COLUMNS) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Calculator 1: DC Ohm & Power -->
+            <div class="p-6 rounded-3xl bg-navy-900 border border-navy-800 space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-slate-400 font-mono flex items-center justify-between">
+                        <span>1. Ohm Kanunu & Güç (V-I-R-P)</span>
+                        <i class="fa-solid fa-bolt text-white"></i>
+                    </h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="text-slate-300 block mb-1 font-mono">Gerilim (V - Volt)</label>
+                            <input type="number" id="dcV" value="12" oninput="calcDC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2.5 font-mono text-white focus:outline-none focus:border-white">
+                        </div>
+                        <div>
+                            <label class="text-slate-300 block mb-1 font-mono">Direnç (R - Ohm)</label>
+                            <input type="number" id="dcR" value="4" oninput="calcDC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2.5 font-mono text-white focus:outline-none focus:border-white">
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-3 border-t border-navy-800 grid grid-cols-2 gap-3 font-mono text-center">
+                    <div class="p-3 rounded-xl bg-navy-950 border border-navy-800">
+                        <span class="text-[10px] text-slate-400 block">Akım (I)</span>
+                        <strong id="outI" class="text-white text-base">3.00 A</strong>
+                    </div>
+                    <div class="p-3 rounded-xl bg-navy-950 border border-navy-800">
+                        <span class="text-[10px] text-slate-400 block">Güç (P)</span>
+                        <strong id="outP" class="text-white text-base">36.00 W</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculator 2: AC Impedance & Resonance -->
+            <div class="p-6 rounded-3xl bg-navy-900 border border-navy-800 space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-slate-400 font-mono flex items-center justify-between">
+                        <span>2. AC Empedans & Rezonans</span>
+                        <i class="fa-solid fa-wave-square text-white"></i>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <label class="text-slate-300 block mb-1 font-mono">Direnç R (Ω)</label>
+                            <input type="number" id="acR" value="15" oninput="calcAC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2 font-mono text-white focus:outline-none focus:border-white">
+                        </div>
+                        <div>
+                            <label class="text-slate-300 block mb-1 font-mono">Frekans f (Hz)</label>
+                            <input type="number" id="acF" value="50" oninput="calcAC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2 font-mono text-white focus:outline-none focus:border-white">
+                        </div>
+                        <div>
+                            <label class="text-slate-300 block mb-1 font-mono">Endüktans L (mH)</label>
+                            <input type="number" id="acL" value="100" oninput="calcAC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2 font-mono text-white focus:outline-none focus:border-white">
+                        </div>
+                        <div>
+                            <label class="text-slate-300 block mb-1 font-mono">Kapasitans C (µF)</label>
+                            <input type="number" id="acC" value="47" oninput="calcAC()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2 font-mono text-white focus:outline-none focus:border-white">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-navy-800 space-y-2 font-mono text-xs">
+                    <div class="flex justify-between items-center p-2 rounded-lg bg-navy-950 border border-navy-800">
+                        <span class="text-slate-400">Empedans |Z|:</span>
+                        <strong id="outZ" class="text-white text-sm">40.12 Ω</strong>
+                    </div>
+                    <div class="flex justify-between items-center p-2 rounded-lg bg-navy-950 border border-navy-800">
+                        <span class="text-slate-400">Rezonans f₀:</span>
+                        <strong id="outF0" class="text-white text-sm">73.41 Hz</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculator 3: Energy Consumption (kWh) -->
+            <div class="p-6 rounded-3xl bg-navy-900 border border-navy-800 space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-slate-400 font-mono flex items-center justify-between">
+                        <span>3. Enerji Tüketimi (kWh)</span>
+                        <i class="fa-solid fa-plug-circle-bolt text-white"></i>
+                    </h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="text-slate-300 block mb-1 font-mono">Cihaz Gücü (Watt)</label>
+                            <input type="number" id="enWatt" value="2000" oninput="calcEnergy()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2.5 font-mono text-white focus:outline-none focus:border-white">
+                        </div>
+                        <div>
+                            <label class="text-slate-300 block mb-1 font-mono">Çalışma Süresi (Saat)</label>
+                            <input type="number" id="enHours" value="5" oninput="calcEnergy()" class="w-full bg-navy-950 border border-navy-800 rounded-xl p-2.5 font-mono text-white focus:outline-none focus:border-white">
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-3 border-t border-navy-800 font-mono text-center">
+                    <div class="p-3 rounded-xl bg-navy-950 border border-navy-800">
+                        <span class="text-[10px] text-slate-400 block">Toplam Harcanan Enerji</span>
+                        <strong id="outKwh" class="text-white text-base">10.00 kWh</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- OSCILLOSCOPE CANVAS SIMULATOR -->
+        <div class="p-6 rounded-3xl bg-navy-900 border border-navy-700 text-white space-y-4 shadow-2xl">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-navy-800 pb-4">
+                <div class="flex items-center space-x-2.5">
+                    <span class="w-3 h-3 rounded-full bg-white animate-pulse"></span>
+                    <span class="font-mono text-xs font-bold uppercase tracking-wider text-white">Dijital Sinyal Osiloskobu (AC / DC Simülatör)</span>
+                </div>
+                <!-- Controls -->
+                <div class="flex flex-wrap items-center gap-4 text-xs font-mono">
+                    <label class="flex items-center space-x-2">
+                        <span class="text-slate-300">Sinyal Türü:</span>
+                        <select id="waveType" onchange="drawScope()" class="bg-navy-950 border border-navy-700 text-white rounded-lg px-2 py-1 focus:outline-none">
+                            <option value="ac">AC Sinüs Dalgası</option>
+                            <option value="dc">DC Doğru Akım (Düz)</option>
+                        </select>
+                    </label>
+                    <label class="flex items-center space-x-2">
+                        <span class="text-slate-300">Frekans (f):</span>
+                        <input type="range" id="scopeFreq" min="1" max="10" value="3" oninput="drawScope()" class="w-20 accent-white">
+                    </label>
+                    <label class="flex items-center space-x-2">
+                        <span class="text-slate-300">Faz Farkı (φ):</span>
+                        <input type="range" id="scopePhase" min="0" max="180" value="30" oninput="drawScope()" class="w-20 accent-slate-400">
+                    </label>
+                </div>
+            </div>
+
+            <div class="relative w-full h-64 bg-navy-950 rounded-2xl border border-navy-800 overflow-hidden">
+                <canvas id="scopeCanvas" class="w-full h-full"></canvas>
+            </div>
+
+            <div class="flex justify-between items-center text-[11px] font-mono text-slate-400 px-1">
+                <div class="flex items-center space-x-4">
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-white mr-1.5"></span> Gerilim (V)</span>
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-slate-400 mr-1.5"></span> Akım (I)</span>
+                </div>
+                <span id="phaseDegDisplay">Faz Farkı: 30°</span>
+            </div>
+        </div>
+
     </div>
 
     <!-- FOOTER -->
     <footer class="border-t border-navy-800 bg-navy-950 py-8 mt-16 text-center text-xs text-slate-400">
         <div class="max-w-7xl mx-auto px-4 space-y-2">
             <p class="font-mono">MULTIMETRE — Engineering Interface</p>
-            <p class="text-[11px] text-slate-500">Akademik standartlara uygun elektrik ve elektronik dokümantasyon platformu.</p>
+            <p class="text-[11px] text-slate-500">Elektrik ve elektronik kavramlar ile hesaplama araçları portalı.</p>
         </div>
     </footer>
 
-    <!-- INTERACTIVE CANVAS & CALC SCRIPT -->
+    <!-- INTERACTIVE SCRIPT -->
     <script>
+        // Main Section Switcher (Kavramlar vs Hesaplamalar)
+        function switchMainTab(tabName) {
+            const viewKavramlar = document.getElementById('viewKavramlar');
+            const viewHesaplamalar = document.getElementById('viewHesaplamalar');
+            const btnKavramlar = document.getElementById('tabBtnKavramlar');
+            const btnHesaplamalar = document.getElementById('tabBtnHesaplamalar');
+            const searchContainer = document.getElementById('searchContainer');
+
+            if (tabName === 'kavramlar') {
+                viewKavramlar.classList.remove('hidden');
+                viewKavramlar.classList.add('grid');
+                viewHesaplamalar.classList.add('hidden');
+                
+                btnKavramlar.className = "flex-1 sm:flex-none px-4 py-2 text-xs font-bold rounded-lg bg-white text-navy-950 transition shadow-sm flex items-center justify-center space-x-2";
+                btnHesaplamalar.className = "flex-1 sm:flex-none px-4 py-2 text-xs font-bold rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center space-x-2";
+                if (searchContainer) searchContainer.classList.remove('lg:hidden');
+            } else {
+                viewKavramlar.classList.add('hidden');
+                viewKavramlar.classList.remove('grid');
+                viewHesaplamalar.classList.remove('hidden');
+
+                btnHesaplamalar.className = "flex-1 sm:flex-none px-4 py-2 text-xs font-bold rounded-lg bg-white text-navy-950 transition shadow-sm flex items-center justify-center space-x-2";
+                btnKavramlar.className = "flex-1 sm:flex-none px-4 py-2 text-xs font-bold rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center space-x-2";
+                if (searchContainer) searchContainer.classList.add('lg:hidden');
+                
+                // Redraw oscilloscope when tab becomes visible so canvas gets proper width
+                setTimeout(drawScope, 50);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Live Document Filter
         function filterDocs() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const sections = document.querySelectorAll('.doc-section');
@@ -628,6 +848,7 @@
             });
         }
 
+        // Oscilloscope Canvas Visualizer
         function drawScope() {
             const canvas = document.getElementById('scopeCanvas');
             if (!canvas) return;
@@ -638,6 +859,8 @@
 
             const width = canvas.width;
             const height = canvas.height;
+            if (width === 0 || height === 0) return;
+
             const waveType = document.getElementById('waveType').value;
             const freq = parseFloat(document.getElementById('scopeFreq').value) || 3;
             const phaseDeg = parseFloat(document.getElementById('scopePhase').value) || 0;
@@ -696,6 +919,7 @@
             }
         }
 
+        // DC Calculations
         function calcDC() {
             const v = parseFloat(document.getElementById('dcV').value) || 0;
             const r = parseFloat(document.getElementById('dcR').value) || 0;
@@ -707,6 +931,7 @@
             document.getElementById('outP').textContent = `${p.toFixed(2)} W`;
         }
 
+        // AC Impedance & Resonance Calculations
         function calcAC() {
             const r = parseFloat(document.getElementById('acR').value) || 0;
             const f = parseFloat(document.getElementById('acF').value) || 0;
@@ -729,10 +954,20 @@
             document.getElementById('outF0').textContent = `${f0.toFixed(2)} Hz`;
         }
 
+        // Energy Consumption Calculation (kWh)
+        function calcEnergy() {
+            const watt = parseFloat(document.getElementById('enWatt').value) || 0;
+            const hours = parseFloat(document.getElementById('enHours').value) || 0;
+
+            const kwh = (watt / 1000) * hours;
+            document.getElementById('outKwh').textContent = `${kwh.toFixed(2)} kWh`;
+        }
+
         window.onload = function() {
             drawScope();
             calcDC();
             calcAC();
+            calcEnergy();
         };
 
         window.onresize = function() {
