@@ -129,16 +129,20 @@
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">V/I/R/W</span>
                         </a>
                         <a href="#dc-temeller" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
-                            <span>2. Doğru Akım (DC)</span>
+                            <span>2. Doğru Akım (DC) & Devreler</span>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">DC</span>
                         </a>
                         <a href="#ac-esaslar" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
-                            <span>3. Alternatif Akım (AC)</span>
+                            <span>3. Alternatif Akım (AC) & Faz</span>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">AC</span>
                         </a>
                         <a href="#empedans-rezonans" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
                             <span>4. Empedans & Reaktans</span>
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">Z / X</span>
+                        </a>
+                        <a href="#guvenlik-durumlar" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-300 hover:bg-navy-800 hover:text-white transition border border-transparent hover:border-navy-700">
+                            <span>5. Devre Durumları & Güvenlik</span>
+                            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-navy-950 text-slate-400 border border-navy-800">Koruma</span>
                         </a>
                         <button onclick="switchMainTab('hesaplamalar')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-white bg-navy-800 font-semibold border border-navy-600 mt-3 shadow-sm hover:bg-navy-700 transition text-left">
                             <span><i class="fa-solid fa-calculator mr-2 text-slate-300"></i>Hesaplamalara Geç</span>
@@ -164,7 +168,7 @@
                         Elektrik & Elektronik Kavramlar Rehberi
                     </h1>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
-                        Atomik yapıdan temel elektriksel büyüklüklere, DC ve AC devre teorisinden empedans ve reaktans kavramlarına kadar eksiksiz teknik dokümantasyon.
+                        Atomik yapıdan temel büyüklüklere, DC ve AC devre analizinden faz, güç faktörü, empedans, devre durumları ve elektriksel güvenliğe kadar kapsamlı kavram rehberi.
                     </p>
                 </div>
             </div>
@@ -204,7 +208,7 @@
                 </div>
             </section>
 
-            <!-- SECTION 1: TEMEL BÜYÜKLÜKLER (AKIM, VOLTAJ, DİRENÇ, GÜÇ, FREKANS, ENERJİ) -->
+            <!-- SECTION 1: TEMEL BÜYÜKLÜKLER -->
             <section id="temel-buyuklukler" class="doc-section space-y-6 scroll-mt-24">
                 <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
                     <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">01</div>
@@ -307,6 +311,38 @@
                             Formül: <span class="text-white font-bold">E = P · t</span> (Güç [kW] × Zaman [Saat])
                         </div>
                     </div>
+
+                    <!-- İletkenlik (G) -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">İletkenlik (G)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Siemens [S]</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Bir malzemenin veya devrenin elektrik akımını geçirme kolaylığıdır; elektriksel direncin (R) matematiksel tersidir. Bakır ve gümüş yüksek iletkenliğe sahiptir.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">G = 1 / R</span> veya <span class="text-white font-bold">G = I / V</span>
+                        </div>
+                    </div>
+
+                    <!-- Özdirenç (ρ) -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3 md:col-span-2">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Özdirenç (ρ - Ro)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Ohm·metre [Ω·m]</span>
+                            </div>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Maddenin kendi atomik yapısından kaynaklanan ve akıma karşı gösterdiği ayırt edici direnç katsayısıdır. Telin boyundan veya kalınlığından bağımsızdır; sadece malzemenin cinsine ve sıcaklığına bağlıdır. Özdirenci düşük maddeler iyi iletken, yüksek olanlar ise yalıtkandır.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">ρ = R · (A / L)</span> &nbsp;|&nbsp; Dirençle İlişkisi: <span class="text-white font-bold">R = ρ · (L / A)</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -402,11 +438,11 @@
                 </div>
             </section>
 
-            <!-- SECTION 3: AC ESASLARI & KULLANIM ALANLARI -->
+            <!-- SECTION 3: AC ESASLARI, FAZ, FAZ FARKI & GÜÇ FAKTÖRÜ -->
             <section id="ac-esaslar" class="doc-section space-y-6 scroll-mt-24">
                 <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
                     <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">03</div>
-                    <h2 class="text-2xl font-bold tracking-tight text-white">Alternatif Akım (AC) Esasları ve Kullanım Alanları</h2>
+                    <h2 class="text-2xl font-bold tracking-tight text-white">Alternatif Akım (AC), Faz ve Güç Faktörü</h2>
                 </div>
 
                 <!-- AC Tanım ve Kullanım Alanları -->
@@ -454,13 +490,42 @@
                     </div>
                 </div>
 
-                <div class="p-6 rounded-2xl bg-navy-900 border border-navy-800 space-y-4">
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        Alternatif Akım denklemi sinüsoidal formdadır:
-                        <span class="font-mono font-bold text-white block mt-2 text-center text-sm p-3 rounded-xl math-badge">v(t) = V_p · sin(ωt + φ)</span>
-                    </p>
+                <!-- Faz ve Faz Farkı Kartları -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Faz (φ)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Derece [°] / Radyan</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Periyodik bir dalganın (örneğin sinüs dalgasının) başlangıç anındaki (t = 0) konumunu veya tam bir tur (360°) içindeki anlık evresini belirtir.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Denklem: <span class="text-white font-bold">v(t) = V_p · sin(ωt + φ)</span> (φ: Başlangıç Fazı)
+                        </div>
+                    </div>
 
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs pt-2">
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Faz Farkı (Δφ / θ)</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Önde / Geride Olma</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Aynı frekanstaki iki AC sinyalin (çoğunlukla gerilim ile akımın) tepe ve sıfır geçiş noktaları arasındaki açısal gecikme veya ilerleme farkıdır. Bobinli devrelerde gerilim akımdan önde, kapasitif devrelerde ise geride kalır.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Formül: <span class="text-white font-bold">Δφ = φ_1 - φ_2</span> veya <span class="text-white font-bold">Δφ = 2πf · Δt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sinyal Parametreleri -->
+                <div class="p-6 rounded-2xl bg-navy-900 border border-navy-800 space-y-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
                         <div class="p-3.5 rounded-xl bg-navy-950 border border-navy-800">
                             <span class="text-slate-400 block mb-1">Açısal Frekans</span>
                             <span class="font-mono font-bold text-sm text-white">ω = 2πf</span>
@@ -475,39 +540,45 @@
                         </div>
                         <div class="p-3.5 rounded-xl bg-navy-950 border border-navy-800">
                             <span class="text-slate-400 block mb-1">Güç Faktörü</span>
-                            <span class="font-mono font-bold text-sm text-white">cos(φ)</span>
+                            <span class="font-mono font-bold text-sm text-white">PF = cos(φ)</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- AC Güç Bileşenleri -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-1.5">
-                        <span class="text-slate-400 font-mono">Aktif Güç (P)</span>
-                        <div class="font-mono font-bold text-base text-white">P = V · I · cos(φ) [W]</div>
-                        <p class="text-slate-400">İş yapan, ısı veya harekete dönüşen gerçek güç.</p>
+                <!-- AC Güç Bileşenleri & Güç Faktörü -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-sm text-white">Güç Faktörü (cos φ)</h3>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">0 ile 1 Arası</span>
+                        </div>
+                        <p class="text-slate-300 leading-relaxed">
+                            Şebekeden çekilen görünür gücün ne kadarının gerçek işe (aktif güce) dönüştüğünü gösteren verimlilik oranıdır. Akım ve gerilim arasındaki faz açısının kosinüsüne eşittir; 1'e ne kadar yakınsa enerji kullanımı o kadar verimlidir.
+                        </p>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-white font-bold">
+                            cos(φ) = P / S = R / |Z|
+                        </div>
                     </div>
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-1.5">
-                        <span class="text-slate-400 font-mono">Reaktif Güç (Q)</span>
-                        <div class="font-mono font-bold text-base text-white">Q = V · I · sin(φ) [VAR]</div>
-                        <p class="text-slate-400">Manyetik ve elektrik alanlarda depolanan kör güç.</p>
-                    </div>
-                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-1.5">
-                        <span class="text-slate-400 font-mono">Görünür Güç (S)</span>
-                        <div class="font-mono font-bold text-base text-white">S = V · I [VA]</div>
-                        <p class="text-slate-400">Şebekeden çekilen toplam bileşke güç (S = √(P² + Q²)).</p>
+
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 space-y-2">
+                        <span class="text-slate-400 font-mono">Aktif (P), Reaktif (Q) ve Görünür Güç (S)</span>
+                        <div class="font-mono font-bold text-xs text-white space-y-1 pt-1">
+                            <div>Aktif Güç: P = V · I · cos(φ) [W]</div>
+                            <div>Reaktif Güç: Q = V · I · sin(φ) [VAR]</div>
+                            <div>Görünür Güç: S = V · I = √(P² + Q²) [VA]</div>
+                        </div>
+                        <p class="text-slate-400 pt-1">P gerçek işi yapar, Q manyetik/elektrik alanda depolanır, S toplam şebeke yüküdür.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- SECTION 4: EMPEDANS, REAKTANS, ENDÜKTANS & KAPASİTANS (ÖNCE TANIM, SONRA FORMÜL) -->
+            <!-- SECTION 4: EMPEDANS, REAKTANS, ENDÜKTANS & KAPASİTANS -->
             <section id="empedans-rezonans" class="doc-section space-y-6 scroll-mt-24">
                 <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
                     <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">04</div>
                     <h2 class="text-2xl font-bold tracking-tight text-white">Empedans, Reaktans, Endüktans ve Kapasitans</h2>
                 </div>
 
-                <!-- 4 Kavram Kartı: Önce Tanım Sonra Formül -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                     
                     <!-- 1. Empedans -->
@@ -589,6 +660,80 @@
                     <div class="pt-2 border-t border-navy-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                         <span class="text-slate-300">Rezonans Frekansı Formülü:</span>
                         <span class="px-3 py-1.5 rounded-lg math-badge text-white font-bold">f₀ = 1 / ( 2π √(L · C) )</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: DEVRE DURUMLARI & ELEKTRİKSEL GÜVENLİK -->
+            <section id="guvenlik-durumlar" class="doc-section space-y-6 scroll-mt-24">
+                <div class="flex items-center space-x-3 border-b border-navy-800 pb-3">
+                    <div class="w-8 h-8 rounded-lg bg-white text-navy-950 flex items-center justify-center font-black text-sm">05</div>
+                    <h2 class="text-2xl font-bold tracking-tight text-white">Devre Durumları ve Elektriksel Güvenlik</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <!-- Kısa Devre -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Kısa Devre</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">R ≈ 0 Ω</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Faz ile nötrün veya kaynağın artı ve eksi uçlarının arada yük (direnç) olmadan doğrudan birbirine temas etmesidir. Direnç neredeyse sıfıra indiğinden devreden aniden çok yüksek akım geçer; aşırı ısınmaya, kıvılcıma veya sigorta/şalter atmasına yol açar.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Davranış: <span class="text-white font-bold">R → 0</span> iken <span class="text-white font-bold">I = V / R → Çok Yüksek</span>
+                        </div>
+                    </div>
+
+                    <!-- Açık Devre -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Açık Devre</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">R → ∞ (Sonsuz)</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Elektrik akımının aktığı yolun bir noktada kopması, anahtarın açık kalması veya kablonun/sigortanın atmasıyla yolun tamamlanamaması durumudur. Yol kesildiği için devreden akım akmaz; ancak açık kalan iki uç arasında kaynak gerilimi ölçülebilir.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Davranış: <span class="text-white font-bold">Akım I = 0 A</span> &nbsp;|&nbsp; <span class="text-white font-bold">Uçlar Arası V = V_kaynak</span>
+                        </div>
+                    </div>
+
+                    <!-- Topraklama -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Topraklama</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">Güvenlik Hattı</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Elektrikli cihazların metal gövdelerinin ve tesisatın belirli noktalarının, iletken hatlar aracılığıyla doğrudan toprağa bağlanması işlemidir. İzolasyon arızası yüzünden cihaz gövdesine gerilim sızarsa, akımı güvenli biçimde toprağa aktararak insan hayatını ve cihazları korur.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Referans Potansiyel: <span class="text-white font-bold">V_toprak ≈ 0 V</span> (Koruma Hattı: PE)
+                        </div>
+                    </div>
+
+                    <!-- Kaçak Akım -->
+                    <div class="p-5 rounded-2xl bg-navy-900 border border-navy-800 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-base text-white">Kaçak Akım</h3>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-950 text-slate-300 border border-navy-800">RCD / Kaçak Akım Rölesi</span>
+                            </div>
+                            <p class="text-slate-300 leading-relaxed">
+                                Akımın normal izlemesi gereken faz-nötr hattı dışına sızarak toprağa, nemli yüzeye veya bir kişinin vücuduna yönelen istenmeyen akımdır. Kaçak akım rölesi (RCD), faz ve nötr arasındaki akım farkını milisaniyeler içinde algılayıp devreyi keserek elektrik çarpmasını önler.
+                            </p>
+                        </div>
+                        <div class="pt-2 border-t border-navy-800 font-mono text-xs text-slate-300">
+                            Denge Kuralı: <span class="text-white font-bold">I_kaçak = I_faz - I_nötr</span> (Normalde 0'a çok yakın)
+                        </div>
                     </div>
                 </div>
             </section>
